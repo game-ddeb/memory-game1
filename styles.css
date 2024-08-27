@@ -1,0 +1,115 @@
+/* styles.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F5F5F5;
+    margin: 0;
+    overflow: hidden; /* 축하 애니메이션이 화면을 넘지 않도록 설정 */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    gap: 10px;
+}
+
+.card {
+    width: 120px;
+    height: 150px;
+    perspective: 1000px;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background-image: url('back-image.jpg'); /* 카드 뒷면 이미지 추가 */
+    background-size: cover;
+    background-position: center;
+}
+
+.card img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+}
+
+.card .text {
+    font-size: 14px;
+    text-align: center;
+    padding: 0 5px;
+}
+
+/* 축하 메시지 스타일 */
+#congratulations {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#congratulations.hidden {
+    display: none; /* 축하 메시지를 숨기기 위한 클래스 */
+}
+
+/* 축하 애니메이션 */
+@keyframes confetti {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #FFD700;
+    z-index: 999;
+    animation: confetti 3s linear infinite;
+    border-radius: 50%;
+    pointer-events: none;
+}
